@@ -94,10 +94,10 @@ window.onload = function(){
 	var render = function () {
 		requestAnimationFrame( render );
 		count = (count+1)%600;
+		ambientLight.color.setHSL( count / 600, 1, 0.5 );
 
 		for( var i =0; i < curves.length; i++){	
 			//curves[i].material.color.setHSL( ( ( i / curves.length) + (count/600) ) % 1,1,0.5);
-			ambientLight.color.setHSL( count / 600, 1, 0.5 );
 			if (document.getElementById('rotate').checked) {
 				curves[i].rotation.x += 0.005;
 				curves[i].rotation.y += 0.005;
