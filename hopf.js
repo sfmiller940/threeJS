@@ -1,4 +1,3 @@
-
 window.onload = function(){
 	// Setup scene
 	var scene = new THREE.Scene();
@@ -48,7 +47,7 @@ window.onload = function(){
 		var X3 = Math.cos( zeta1 - zeta2) * Math.cos(eta);	
 		var X4 = Math.sin( zeta1 - zeta2) * Math.cos(eta);
 		var norm = (1 + X4);
-		if( norm == 0){ return false; }
+		if( 0 === norm){ return false; }
 		X1 = X1 / norm;	
 		X2 = X2 / norm;	
 		X3 = X3 / norm;
@@ -65,25 +64,26 @@ window.onload = function(){
 	for (var i=0; i < numSeg; i++){
 		newCurve: for (var k=0; k < 12; k++){
 			var vectors = [];
+			var Vect, curve, geometry, material;
 			for (var j=0; j < 100; j++){
-				var Vect = Hopf( TAU * i / numSeg, TAU * j / 100,  k * Math.PI / 24);
+				Vect = Hopf( TAU * i / numSeg, TAU * j / 100,  k * Math.PI / 24);
 				if( Vect !== false){ vectors.push( Vect ); }
 				else{ continue newCurve; }
 			}
-			var curve = new THREE.ClosedSplineCurve3( vectors );
-			var geometry = new THREE.TubeGeometry(curve,60,5,12,true);
-			var material = new THREE.MeshLambertMaterial({color:0xcccccc});
+			curve = new THREE.ClosedSplineCurve3( vectors );
+			geometry = new THREE.TubeGeometry(curve,60,5,12,true);
+			material = new THREE.MeshLambertMaterial({color:0xcccccc});
 			curves.push( new THREE.Mesh( geometry, material ) );
 			scene.add( curves[ curves.length - 1 ] );
-			var vectors = [];
+			vectors = [];
 			for (var j=0; j < 100; j++){
-				var Vect = Hopf( TAU * j / 100, TAU * i / numSeg,  k * Math.PI / 24 );
+				Vect = Hopf( TAU * j / 100, TAU * i / numSeg,  k * Math.PI / 24 );
 				if( Vect !== false){ vectors.push( Vect ); }
 				else{ continue newCurve; }
 			}
-			var curve = new THREE.ClosedSplineCurve3( vectors );
-			var geometry = new THREE.TubeGeometry(curve,60,5,12,true);
-			var material = new THREE.MeshLambertMaterial({color: 0xaaaaaa});
+			curve = new THREE.ClosedSplineCurve3( vectors );
+			geometry = new THREE.TubeGeometry(curve,60,5,12,true);
+			material = new THREE.MeshLambertMaterial({color: 0xaaaaaa});
 			curves.push( new THREE.Mesh( geometry, material ) );
 			scene.add( curves[ curves.length - 1 ] );
 		}
